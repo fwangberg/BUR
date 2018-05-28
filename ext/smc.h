@@ -52,16 +52,32 @@ Sources:
 - https://github.com/hholtmann/smcFanControl
 - https://github.com/jedda/OSX-Monitoring-Tools
 - http://www.parhelia.ch/blog/statics/k3_keys.html
+
+Added sources:
+- https://github.com/Chris911/iStats
 */
 #define AMBIENT_AIR_0          "TA0P"
+#define AMBIENT_AIR_0_1        "TA0p"
 #define AMBIENT_AIR_1          "TA1P"
-#define CPU_0_DIODE            "TC0D"
-#define CPU_0_HEATSINK         "TC0H"
-#define CPU_0_PROXIMITY        "TC0P"
+#define AMBIENT_AIR_1_1        "TA1p"
+#define PCI_SLOT_1_POS_1       "TA0S"
+#define PCI_SLOT_1_POS_2       "TA1S"
+#define PCI_SLOT_2_POS_1       "TA2S"
+#define PCI_SLOT_2_POS_2       "TA3S"
 #define ENCLOSURE_BASE_0       "TB0T"
 #define ENCLOSURE_BASE_1       "TB1T"
 #define ENCLOSURE_BASE_2       "TB2T"
 #define ENCLOSURE_BASE_3       "TB3T"
+#define CPU_0_CORE             "TC0C"
+#define CPU_0_DIODE            "TC0D"
+#define PECI_CPU_0_0           "TCXC"
+#define PECI_CPU_0_1           "TCXc"
+#define CPU_0_E                "TC0E"
+#define CPU_0_F                "TC0F"
+#define CPU_0_G                "TC0G"
+#define CPU_0_HEATSINK         "TC0H"
+#define CPU_0_J                "TC0J"
+#define CPU_0_PROXIMITY        "TC0P"
 #define GPU_0_DIODE            "TG0D"
 #define GPU_0_HEATSINK         "TG0H"
 #define GPU_0_PROXIMITY        "TG0P"
@@ -71,6 +87,7 @@ Sources:
 #define NORTHBRIDGE            "TN0H"
 #define NORTHBRIDGE_DIODE      "TN0D"
 #define NORTHBRIDGE_PROXIMITY  "TN0P"
+#define SKIN_PROXIMITY         "Ts0P"
 #define THUNDERBOLT_0          "TI0P"
 #define THUNDERBOLT_1          "TI1P"
 #define WIRELESS_MODULE        "TW0P"

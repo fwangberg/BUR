@@ -1,32 +1,43 @@
 
 #include  "ext/smc.c"
+#include <string.h>
 
 int main (int argc, char* argv[]) {
-  char *sensor_list[] = {AMBIENT_AIR_0, AMBIENT_AIR_1, CPU_0_DIODE,
-                         CPU_0_HEATSINK, CPU_0_PROXIMITY, ENCLOSURE_BASE_0,
-                         ENCLOSURE_BASE_1, ENCLOSURE_BASE_2, ENCLOSURE_BASE_3
-                         GPU_0_DIODE, GPU_0_DIODE, GPU_0_HEATSINK,
-                         GPU_0_PROXIMITY, HARD_DRIVE_BAY, MEMORY_SLOT_0,
-                         MEMORY_SLOTS_PROXIMITY, NORTHBRIDGE, NORTHBRIDGE_DIODE,
-                         NORTHBRIDGE_PROXIMITY, THUNDERBOLT_0, THUNDERBOLT_1,
-                         WIRELESS_MODULE};
+  //char *sensor_list[] = {};
+  char characters[] =
+               "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  char sensor[] = "Taaa";
+  char *sensor_ptr = &sensor[0];
 
-  system("clear");
+  //system("clear");
   SMCOpen();
 
-  int i = 0, fans = SMCGetFanNumber(SMC_KEY_FAN_NUM);
+  int i = 0, j = 0, k = 0, fans = SMCGetFanNumber(SMC_KEY_FAN_NUM);
 
-  printf("FANS:\t%i\n", fans);
+  printf("FAN_NUM\t%i\n", fans);
 
-  for (i = 0; i < fans; i++)
+
+  for (i = 0; i < 62; i++) {
+    for (j = 0; j < 62; j++) {
+      for (k = 0; k < 62;k++) {
+        sensor[1] = characters[i];
+        sensor[2] = characters[j];
+        sensor[3] = characters[k];
+        if (SMCGetTemperature(sensor_ptr) > 0)
+          printf("%s:\t%0.01f\t°C\n", sensor_ptr, SMCGetTemperature(sensor_ptr));
+      }
+    }
+  }
+
+/*  for (i = 0; i < fans; i++)
       printf ("FAN_%i\t%0.1f\tRPM\n", i, SMCGetFanSpeed(i));
 
 
-      for (i = 0; i < 21; i++) {
+      for (i = 0; i < 22; i++) {
         if (SMCGetTemperature(sensor_list[i]) > 0.0){
           printf("%s:\t%0.1f\t°C\n", sensor_list[i], SMCGetTemperature(sensor_list[i]));
         }
-      }
+      }*/
 /*
   printf("AMBIENT AIR 0:\t%0.1f\t°C\n", SMCGetTemperature(AMBIENT_AIR_0));
   printf("AMBIENT AIR 1:\t%0.1f\t°C\n", SMCGetTemperature(AMBIENT_AIR_1));
