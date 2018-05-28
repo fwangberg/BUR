@@ -312,7 +312,7 @@ int getBatteryCharge() {
     return charge;
 }
 
-#define SMC_MAIN_TEST
+//#define SMC_MAIN_TEST
 #ifdef SMC_MAIN_TEST
 /* Main method used for test */
 int main(int argc, char *argv[])
