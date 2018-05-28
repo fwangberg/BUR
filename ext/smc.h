@@ -15,7 +15,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-//#include "../include/types.h"
 
 #ifndef __SMC_H__
 #define __SMC_H__
@@ -37,11 +36,51 @@
 #define DATATYPE_UINT32       "ui32"
 #define DATATYPE_SP78         "sp78"
 
+/**
+SMC keys for temperature sensors - 4 byte multi-character constants
+Not applicable to all Mac's of course. In adition, the definition of the codes
+may not be 100% accurate necessarily. Finally, list is incomplete.
+Presumed letter translations:
+- T = Temperature (if first char)
+- C = CPU
+- G = GPU
+- P = Proximity
+- D = Diode
+- H = Heatsink
+Sources:
+- https://www.apple.com/downloads/dashboard/status/istatpro.html
+- https://github.com/hholtmann/smcFanControl
+- https://github.com/jedda/OSX-Monitoring-Tools
+- http://www.parhelia.ch/blog/statics/k3_keys.html
+*/
+#define AMBIENT_AIR_0          "TA0P"
+#define AMBIENT_AIR_1          "TA1P"
+#define CPU_0_DIODE            "TC0D"
+#define CPU_0_HEATSINK         "TC0H"
+#define CPU_0_PROXIMITY        "TC0P"
+#define ENCLOSURE_BASE_0       "TB0T"
+#define ENCLOSURE_BASE_1       "TB1T"
+#define ENCLOSURE_BASE_2       "TB2T"
+#define ENCLOSURE_BASE_3       "TB3T"
+#define GPU_0_DIODE            "TG0D"
+#define GPU_0_HEATSINK         "TG0H"
+#define GPU_0_PROXIMITY        "TG0P"
+#define HARD_DRIVE_BAY         "TH0P"
+#define MEMORY_SLOT_0          "TM0S"
+#define MEMORY_SLOTS_PROXIMITY "TM0P"
+#define NORTHBRIDGE            "TN0H"
+#define NORTHBRIDGE_DIODE      "TN0D"
+#define NORTHBRIDGE_PROXIMITY  "TN0P"
+#define THUNDERBOLT_0          "TI0P"
+#define THUNDERBOLT_1          "TI1P"
+#define WIRELESS_MODULE        "TW0P"
+
 // key values
-#define SMC_KEY_CPU_TEMP      "TC0P"
+
+//#define SMC_KEY_CPU_TEMP      "TC0P"
 #define SMC_KEY_FAN_SPEED     "F%dAc"
 #define SMC_KEY_FAN_NUM       "FNum"
-#define SMC_KEY_BATTERY_TEMP  "TB0T"
+//#define SMC_KEY_BATTERY_TEMP  "TB0T"
 
 
 typedef struct {
