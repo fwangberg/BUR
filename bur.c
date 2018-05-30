@@ -2,8 +2,8 @@
 #include  "ext/smc.c"
 #include <string.h>
 
-void scan_temp(char** sensor_list, unsigned int* num_sensors);
-void save(char* sensor_list);
+char** scan_temp(char** sensor_list, unsigned int* num_sensors);
+void save(char** sensor_list);
 void print (char** sensor_list, unsigned int* num_sensors);
 void display(void);
 
@@ -21,14 +21,16 @@ int main (int argc, char* argv[]) {
   num_sensors = 0;
 
 
-  scan_temp(sensor_list, &num_sensors);
+  sensor_list = scan_temp(sensor_list, &num_sensors);
+  printf("Sensorlist save test: %s, %s", sensor_list[0], sensor_list[1]);
   print(sensor_list, &num_sensors);
-  return 0;
 
+
+  return 0;
 }
 
 
-void scan_temp(char** sensor_list, unsigned int* num_sensors) {
+char** scan_temp(char** sensor_list, unsigned int* num_sensors) {
   SMCOpen();
   /* Go through all possible combinations of T### and see which ones are
    * positive values. Save these ones.
@@ -44,8 +46,8 @@ void scan_temp(char** sensor_list, unsigned int* num_sensors) {
   //     free(sensor_list[i]);
   // }
   //   if (sensor_list != NULL)
-  //     free(sensor_list);
-  // *num_sensors = 0;
+  //     free(sensor_list)
+  *num_sensors = 0;
 
   // setup the array
   //sensor_list = malloc(sizeof (char*) * 1);
@@ -76,26 +78,29 @@ void scan_temp(char** sensor_list, unsigned int* num_sensors) {
           list_check = realloc(sensor_list, (sizeof(char*) * (*num_sensors + 1)));
           if (list_check != NULL) {
             sensor_list = list_check;
-          } else {
+          } else {  // handle in case of memory leak
             free(list_check);
             for (i = 0; i < *num_sensors; i++) {
               free(sensor_list[i]);
             }
             free(sensor_list);
-            exit(-1); // handle in case of memory leak
+            exit(-1);
           }
-          printf("Check for string: %s\n", sensor_list[*num_sensors]);
-          fflush(stdout);
-          printf("%s:\t%0.01f\t°C\n", sensor_list[*num_sensors], SMCGetTemperature(sensor_list[*num_sensors]));
         }
       }
     }
   }
   printf("\r                   \n");
-  fflush(stdout);
-  printf("Found %d sensors!\n", *num_sensors);
+
+
+  for (i = 0; i < *num_sensors; i++){
+    fflush(stdout);
+    printf("%s:\t%0.01f\t°C\n", sensor_list[i],SMCGetTemperature(sensor_list[i]));
+  }
 
   SMCClose();
+
+  return sensor_list;
 
 }
 
